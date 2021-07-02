@@ -1,0 +1,7 @@
+{
+  "name": "Red-Market",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
