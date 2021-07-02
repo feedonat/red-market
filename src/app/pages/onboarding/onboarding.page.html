@@ -1,0 +1,76 @@
+<ion-content fullscreen class=" content ion-padding" scroll-y="false">
+  <ion-slides >
+
+    <ion-slide>
+      <div class="slide">
+        <img src="../../../assets/imgs/wender.svg"/>
+        <h2>Welcome</h2>
+        <p>The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code use.</p>
+      </div>
+      <ion-button shape="round" (click)="next()" >Next
+        <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+      <img src="../../../assets/imgs/search.svg"/>
+      <h2>What is Ionic?</h2>
+      <p><b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.</p>
+      </div>
+      <ion-button shape="round" (click)="next()" >Next
+        <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+      <img src="../../../assets/imgs/search.svg"/>
+      <h2>Lets Get Started !</h2>
+      <p><b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.</p>
+      </div>
+      <ion-button shape="round" (click)="next()" >Get Started
+        <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+        <ion-item lines="none" class="alt-call-to-action-row">
+          <span class="cta-leading-text">Already have an account?</span>
+          <ion-button class="login-button" fill="clear" [routerLink]="['/tabs']">
+            Login here
+          </ion-button>
+        </ion-item>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+      <img src="../../../assets/imgs/social.svg"/>
+      <h2>Let's Create your Account</h2>
+      <h3>Continue with </h3>
+       </div>
+      <ion-button class="fb-btn"  shape="round"(click)="finish()">
+        <ion-icon name="logo-facebook"></ion-icon>
+             Continue with FaceBook
+        </ion-button>
+
+        <ion-button  class="email-btn" fill="outline" shape="round"  (click)="next()" > <ion-icon name="mail"></ion-icon>
+          Continue with Email
+        </ion-button>
+
+        <ion-button class="google-btn"  shape="round"(click)="firebaseLoginPage()" >
+          <ion-icon name="logo-google"></ion-icon>
+          Continue with Google
+        </ion-button>
+
+    </ion-slide>
+
+    <ion-slide>
+      <img src="../../../assets/imgs/social.svg"/>
+      <h3>Almost There , Lets create your account</h3>
+      <p></p>
+      <ion-item >
+        <ion-input type="email" placeholder="email"></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-input type="password" placeholder="password"></ion-input>
+      </ion-item>
+      <p></p>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

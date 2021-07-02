@@ -1,0 +1,54 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" mode="md">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">Selling</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar class="filters-toolbar">
+    <ion-row class="searchbar-row" align-items-center>
+      <ion-col>
+        <ion-searchbar class="items-searchbar" animated [(ngModel)]="searchQuery" (ionChange)="searchList()" placeholder="Filter by name..."></ion-searchbar>
+      </ion-col>
+      <ion-col class="call-to-action-col">
+        <ion-button fill="clear" color="secondary" class="filters-btn" (click)="showAgeFilter = !showAgeFilter">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="firebase-listing-content">
+  <ion-list class="items-list" lines="full" [routerLink]="['item']">
+    <ion-item class="list-item" *ngFor="let item of items " button mode="ios">
+      <ion-row class="user-row">
+        <ion-col size="3" class="user-image-wrapper">
+          <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+            <app-image-shell class="user-image" animation="spinner" [src]="item.image" [alt]="'item image'"></app-image-shell>
+          </app-aspect-ratio>
+        </ion-col>
+        <ion-col class="user-data-wrapper">
+          <div class="user-info">
+            <h3 class="user-name">
+              <app-text-shell animation="bouncing" [data]="item?.name"></app-text-shell>
+            </h3>
+            <h5 class="user-age">
+              <app-text-shell animation="bouncing" [data]="item?.price"></app-text-shell>
+            </h5>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <h3 *ngIf="!items" class="empty-list-message">
+    No users found for the selected filters.
+  </h3>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

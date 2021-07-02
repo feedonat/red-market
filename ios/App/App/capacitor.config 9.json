@@ -1,0 +1,20 @@
+{
+  "appId": "com.highcode.redmarket",
+  "appName": "Red-Market",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/app/browser",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    },
+    "CapacitorFirebaseAuth": {
+      "providers": [
+        "google.com",
+        "facebook.com"
+      ],
+      "languageCode": "en",
+      "nativeAuth": false
+    }
+  }
+}

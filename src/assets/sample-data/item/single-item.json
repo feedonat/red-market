@@ -1,0 +1,21 @@
+{
+    "id": 1,
+    "name": "duis",
+    "desc": "I want to add a few ion-buttons (like a twitter button) with colors that are not my primary, secondary, etc. brand colors (but twitters brand color for example). Since they are not one of the color attribute choices and I can’t overwrite the css of the shadow dom, how would i do that?",
+    "postDate": "8/28/2020",
+    "price": "799.55",
+    "images": [
+        "./assets/sample-images/item/1.png",
+        "./assets/sample-images/fashion/Fashion3-3.4.png",
+        "./assets/sample-images/fashion/Fashion4-3.4.png",
+        "./assets/sample-images/fashion/Fashion7-3.4.png",
+        "./assets/sample-images/fashion/Fashion5-3.4.png"
+
+    ],
+    "brand": "Elantra",
+    "condition": "Open Box",
+    "cat": "Games",
+    "subCat": "Consumer Services",
+    "poster": "jfransinelli0.I want to add a few ion-buttons (like a twitter button) with colors that are not my primary",
+    "address": "97 Garrison Court"
+}

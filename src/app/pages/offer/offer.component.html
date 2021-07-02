@@ -1,0 +1,48 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Enter your Offer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+
+    <ion-col size="10">
+<ion-input hint="decimal" type="number" inputmode="decimal" value="333" clearOnEdit="true"></ion-input>
+    </ion-col>
+
+    <ion-col size="2">
+      <span class="currency">
+        Br
+      </span> 
+   </ion-col>
+
+  </ion-row>
+  <ion-item detail>
+    <ion-row>
+      <ion-col size="3">
+        <ion-avatar>
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="9">
+        <span>Item description goes here </span>
+      </ion-col>
+
+    </ion-row>
+  </ion-item>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-row class="details-purchase-options-row">
+      <ion-col >
+        <ion-button color="primary" expand="block" (click)="makeOffer()">Make offer</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

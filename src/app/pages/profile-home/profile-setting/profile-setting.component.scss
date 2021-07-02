@@ -1,0 +1,77 @@
+@import "theme/mixins/inputs/checkbox-tag";
+
+:host {
+  --page-margin: var(--app-fair-margin);
+  --page-background: var(--app-background);
+
+  --page-background-shade: var(--app-background-shade);
+  --page-tags-gutter: 5px;
+}
+
+.create-user-content {
+
+  .select-user-image-row {
+    --ion-grid-column-padding: 0px;
+    padding: var(--page-margin);
+
+    .user-image-col {
+      margin: 0px auto;
+      position: relative;
+
+      .user-image {
+        border-radius: 50%;
+        border: solid 3px var(--ion-color-lightest);
+      }
+    }
+
+    .change-image-btn {
+      --border-radius: 50%;
+      --padding-start: 0px;
+      --padding-end: 0px;
+
+      position: absolute;
+      right: 0px;
+      bottom: var(--page-margin);
+      z-index: 3;
+      width: 4ch;
+      height: 4ch;
+      margin: 0px;
+
+      .btn-icon {
+        font-size: 26px;
+      }
+    }
+  }
+
+  .fields-section {
+    padding: var(--page-margin) 0px;
+    border-bottom: calc(var(--page-margin) * 2) solid var(--page-background-shade);
+
+    .section-header {
+      padding: 0px var(--page-margin);
+      margin-top: 0px;
+      margin-bottom: var(--page-margin);
+    }
+  }
+
+  .user-details-fields {
+    .inputs-list {
+      padding: 0px var(--page-margin);
+    }
+
+    .input-item {
+      --padding-start: 0px;
+      --padding-end: 0px;
+      --inner-padding-start: 0px;
+      --inner-padding-end: 0px;
+    }
+  }
+
+.form-actions-wrapper {
+  --ion-grid-column-padding: calc(var(--page-margin) / 2);
+  padding: calc(var(--page-margin) / 2);
+  .submit-btn {
+    margin: 0px;
+  }
+}
+}

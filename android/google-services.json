@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "683784624892",
+    "project_id": "red-market1",
+    "storage_bucket": "red-market1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683784624892:android:63e335d936d82400065579",
+        "android_client_info": {
+          "package_name": "com.highcode.redmarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683784624892-blc3oornk9p0d6u48e5u8ddpnsad37dk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.highcode.redmarket",
+            "certificate_hash": "262814dbba3afa65a3c9ad6fb5fdffd0958d6735"
+          }
+        },
+        {
+          "client_id": "683784624892-ufa8h466s3jage3nc8hiaofm0canlnp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmvCD3m8Ddg6ANLxoGEA7o_ocbsgEYVEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683784624892-ufa8h466s3jage3nc8hiaofm0canlnp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

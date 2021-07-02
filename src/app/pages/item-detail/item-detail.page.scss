@@ -1,0 +1,270 @@
+@import "theme/mixins/inputs/select-alert";
+
+// Custom variables
+// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
+:host {
+  --page-margin: var(--app-fair-margin);
+  --page-background: var(--app-background);
+
+  --page-swiper-pagination-space: 30px;
+  --page-swiper-pagination-height: 18px;
+  --page-pagination-bullet-size: 10px;
+
+  --page-options-gutter: calc(var(--page-margin) / 2);
+  --page-related-items-gutter: calc(var(--page-margin) / 2);
+
+  --page-color: #cb328f;
+}
+app-image-shell.showcase-image {
+  --image-shell-loading-background: rgba(var(--shell-color-rgb), .10);
+  --image-shell-spinner-color: rgba(var(--shell-color-rgb), .25);
+}
+// Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
+.fashion-details-content {
+  //--background: var(--page-background);
+
+  .slider-row {
+    height: 450px;
+    .details-slides {
+      --bullet-background: var(--ion-color-dark-tint);
+      --bullet-background-active: var(--ion-color-dark-tint);
+
+      height: 100%;
+      width: 100%;
+
+      .slide-inner-row {
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+        // .swiper-pagination space
+        padding-bottom: var(--page-swiper-pagination-space);
+      }
+    }
+
+    .showcase-image {
+      width: 100%;
+
+      &.centered-image {
+        background-size: auto;
+        background-position: center;
+      }
+    }
+  }
+
+  .details-purchase-options-row {
+    --ion-grid-column-padding: var(--page-options-gutter);
+
+    padding-top: 0px;
+    padding-left: calc(var(--page-margin) - var(--page-options-gutter));
+    padding-right: calc(var(--page-margin) - var(--page-options-gutter));
+    padding-bottom: calc(var(--page-margin) * 2);
+
+    .aux-action-col {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 0px;
+      padding-bottom: 0px;
+
+      .size-chart-btn {
+        margin: 0px;
+        height: 25px;
+      }
+    }
+
+    .main-call-to-action-col {
+      padding-bottom: 0px;
+    }
+
+    .select-variant-btn {
+      margin: 0px;
+    }
+
+    .add-to-cart-btn {
+      margin: 0px;
+      margin-top: var(--page-margin);
+    }
+  }
+
+  .detail-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ion-color-dark-tint);
+    margin: 0px;
+    margin-bottom: calc(var(--page-margin) / 2);
+  }
+
+  .details-description-wrapper {
+    padding-top: 0px;
+    padding-left: var(--page-margin);
+    padding-right: var(--page-margin);
+    padding-bottom: calc(var(--page-margin) * 2);
+
+    .details-description {
+      margin: 0px;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    .details-price {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0px;
+      padding-bottom: 2px;
+      display: inline-block;
+    }
+  }
+}
+
+
+// ISSUE: .swiper-paggination gets rendered dynamically. That prevents styling the elements when using the default Angular ViewEncapsulation.None
+//        (Angular doesn't add an '_ngcontent' attribute to the .swiper-paggination because it's dynamically rendered)
+// FIX:   See: https://stackoverflow.com/a/36265072/1116959
+:host ::ng-deep .details-slides {
+  .swiper-pagination {
+    height: var(--page-swiper-pagination-height);
+    line-height: 1;
+    // .swiper-pagination is 18px height, .slide-inner-row has 40px of padding-bottom => bottom = (40px - 18px)/2 = 11px
+    bottom: calc((var(--page-swiper-pagination-space) - var(--page-swiper-pagination-height) ) / 2);
+
+    .swiper-pagination-bullet {
+      width: var(--page-pagination-bullet-size);
+      height: var(--page-pagination-bullet-size);
+    }
+  }
+}
+
+// Alerts and in general all overlays are attached to the body or ion-app directly
+// We need to use ::ng-deep to access it from here
+::ng-deep .variant-alert {
+  @include select-alert();
+
+  // Variables should be in a deeper selector or after the mixin include to override default values
+  --select-alert-color: var(--ion-color-lightest);
+  --select-alert-background: var(--ion-color-primary);
+  --select-alert-margin: var(--app-fair-margin);
+
+  .alert-message {
+    display: none;
+  }
+}
+.footer-tool-bar{
+  height: 60px;
+}
+
+ion-item{
+
+  img{
+    max-width: 60px;
+    width: 65px;
+    height: 65px;
+    margin-top: 5px;
+    margin-left: -5px;
+  }
+  margin-top: 20px;
+    --ion-item-background :var(--ion-color-light );
+    border-radius: 16px;
+   
+}
+/* Show background if class is active */
+.show-background {
+  border-style: none;
+  animation: fadein 1s;
+  -moz-animation: fadein 1s; /* Firefox */
+  -webkit-animation: fadein 1s; /* Safari and Chrome */
+  -o-animation: fadein 1s; /* Opera */
+  background: var(--ion-color-dark);
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  /* Firefox */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.header-ion-toolbar {
+  --background: transparent no-repeat fixed center;
+  position: absolute;
+  top: 0;
+  padding-left: 3px;
+  padding-right: 3px;
+  
+}
+
+/* Remove bottom border on md */
+.header-md::after {
+  background-image: none;
+}
+/* Remove bottom border on ios */
+.header-ios ion-toolbar:last-child {
+  --border-width: 0;
+}
+.action-btn {
+  --border-radius: 50%;
+  --padding-start: 2px;
+  --padding-end: 2px;
+
+  width: 40px;
+  height: 40px;
+
+  .btn-icon {
+    font-size: 30px;
+
+  }
+}
+ion-card{
+ img{
+   padding: 5px;
+ }
+ margin-top: -20px;
+
+}
+
+
+.similar-items{
+
+  ion-card {
+    display: block;
+    margin: 0;
+    border-radius: 6px;
+  
+    .cover-img {
+      background-color: var(--ion-color-white);
+      background-size: cover;
+      background-position: 100%;
+      object-fit: cover;
+      position: relative;
+    }
+  }
+  
+  ion-card-content {
+    padding: var(--content-padding, 8px) !important;
+  }
+  ion-row {
+    width: calc(100% - 5px);
+    margin: 0 auto;
+  
+    ion-col {
+      padding: 3px;
+    }
+  }
+}

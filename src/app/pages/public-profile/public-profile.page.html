@@ -1,0 +1,101 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title mode="ios"> Profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon
+          slot="icon-only"
+          name="ellipsis-vertical-outline"
+          color="primary"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col class="profile-ion-col">
+      <ion-avatar>
+        <img
+          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+        />
+      </ion-avatar>
+    </ion-col>
+    <ion-col>
+      <div class="profile">
+        <div>
+          <h4>Kedirosa Moha</h4>
+        </div>
+        <div>Joind Mar 2020</div>
+        <div>Richardson TX</div>
+        <div class="rating">* * * * *</div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="follow">
+    <ion-col>
+      <ion-button color="primary" expand="block">Follow</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-row-follower">
+    <ion-col>
+      <ion-card>
+        <h5>60 | Bought</h5>
+        <h5>20 | Sold</h5>
+      </ion-card>
+    </ion-col>
+
+    <ion-col>
+      <ion-card>
+        <h5>60 | Follower</h5>
+        <h5>200 | Following</h5>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <div class="bold-title">
+    <h4>Review</h4>
+  </div>
+  <ion-row class="ion-row-padding">
+    <ion-col *ngFor="let review of reviews" class="review">
+      <ion-badge >{{review}}</ion-badge>
+    </ion-col>
+  </ion-row>
+
+  <div class="bold-title">
+    <h4>Items from this seler</h4>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        class="ion-col-items"
+        size-xs="6"
+        size-sm="4"
+        size-lg="3"
+        *ngFor="let item of items |async"
+      >
+        <ion-card
+          ion-activatable
+          ripple-parent
+          mode="ios"
+          routerLink="/item-detail"
+          class="shadow ion-no-margin ion-margin-bottom"
+        >
+          <img class="cover-img" src="{{item?.image}}" />
+          <!-- <ion-card-content>
+            <div class="ion-text-nowrap">
+              <ion-text color="primary">
+                <h3 class="bold ellipsis">{{ item?.name }}</h3>
+              </ion-text>
+            </div>
+          </ion-card-content> -->
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
