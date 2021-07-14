@@ -1,14 +1,14 @@
+@import "theme/mixins/scrollbars";
 .filters-toolbar {
   --padding-start: var(--page-margin);
   --padding-end: var(--page-margin);
   --padding-top: var(--page-margin);
   --padding-bottom: var(--page-margin);
 
-
-  .sc-ion-searchbar-md-h{
+  .sc-ion-searchbar-md-h {
     --background: rgb(228, 226, 226);
     --border-radius: 20px;
-    --box-shadow:none;
+    --box-shadow: none;
   }
   .searchbar-row {
     --ion-grid-column-padding: 0px;
@@ -19,9 +19,7 @@
       height: 100%;
       // Learn more about CSS contain property here: https://termvader.github.io/css-contain/
       contain: content;
-      
     }
-    
 
     .call-to-action-col {
       padding-inline-start: var(--page-margin);
@@ -75,7 +73,6 @@
     .range-control {
       // override the pin color
       --ion-text-color: var(--ion-color-medium);
-
       padding-top: 0px;
       padding-bottom: 0px;
     }
@@ -97,15 +94,58 @@ ion-card {
     position: relative;
   }
 }
+h5 {
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px;
+  margin-left: 5px;
+}
 
 ion-card-content {
   padding: var(--content-padding, 8px) !important;
 }
-ion-row {
+.item-ion-row {
   width: calc(100% - 5px);
   margin: 0 auto;
 
   ion-col {
     padding: 2px;
+  }
+}
+.cat-ion-slides {
+  // width: 160px !important;
+  //display: block;
+  //margin-top: -20px;
+  padding: 10px;
+  ion-slide {
+    height: 80px;
+    width: 120px !important;
+    margin-top: 6px;
+    .single-cat {
+      display: flex;
+      flex-direction: column;
+      margin-top: 35px;
+      margin-bottom: 20px;
+      gap: 2px;
+      .pic {
+        ion-card {
+          border-radius: 20px;
+          ion-card-content {
+            align-items: center;
+            text-align: center;
+          }
+          ion-icon {
+            font-size: 50px;
+            --ionicon-stroke-width: 18px;
+          }
+          height: 60px;
+          width: 100px;
+        }
+      }
+      .desc {
+        font-size: 15px;
+      }
+    }
   }
 }

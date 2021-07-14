@@ -29,8 +29,42 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-row>
+    <ion-col size="12" >
+      <h5>Top category</h5>
+    </ion-col>
+    </ion-row>
+           <ion-col size="12"  >
+            <ion-slides pager="false" [options]="slidesOptions" class="cat-ion-slides" *ngIf="viewEntered">
+              <ion-slide   *ngFor="let cat of categories">
+                <div class="single-cat">
+                  <div class="pic">
+            <ion-card class="step1-ion-card" [color]="category_bg"
+           
+              (click)="categoryClicked()"
+              [color]="forSale ? 'primary' : ''"
+              button
+              ion-activatable
+              ripple-parent
+            >
+            
+              <ion-card-content>
+                <ion-icon name="bed-outline"></ion-icon>
+              </ion-card-content>
+            </ion-card>
+          </div>
+          <div class="desc">
+            <span class="post-type">
+              <p>{{cat}}</p>
+            </span>
+          </div>
+          </div>
+            </ion-slide>
+            </ion-slides>
+           </ion-col>
+      
     <ion-grid>
-      <ion-row>
+      <ion-row class="item-ion-row ">
         <ion-col
         
         size-xs="4"

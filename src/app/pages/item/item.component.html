@@ -1,11 +1,216 @@
-
-<ion-header translucent>
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Modal Content</ion-title>
+    <ion-title>Post an Item</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">
-        <ion-icon name="close"></ion-icon>
+        <ion-icon class="ion-icon-close" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-slides pager="true" [options]="slidesOptions" *ngIf="viewEntered">
+    <!-- step 1 -->
+    <ion-slide>
+     
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <h4>What is your post for</h4>
+          </ion-col>
+          <ion-col size="12">
+            <ion-card class="step1-ion-card"
+              (click)="selectSaleType()"
+              [color]="forSale ? 'primary' : ''"
+              button
+              ion-activatable
+              ripple-parent
+            >
+              <ion-card-content>
+                <div class="post-type">
+                  <h2>For Sale</h2>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" ion-activatable ripple-parent>
+            <ion-card class="step1-ion-card"
+              [color]="forRent ? 'primary' : ''"
+              button
+              (click)="selectRentType()"
+            >
+              <ion-card-content>
+                <div class="post-type">
+                  <h2>For Rent</h2>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <!-- step 2 -->
+    
+    <ion-slide>
+   
+      <ion-grid>
+        <ion-row>
+         <ion-col size="12">
+          <h4>Add Item Photo</h4>
+         </ion-col>
+          <ion-col size="6">
+            <ion-card class="step2-ion-card" (click)="selectImageSource()"
+              color="primary"
+              button
+              ion-activatable
+              ripple-parent
+            >
+            <ion-img  *ngIf="coverImage" class="cover-img"   [src]="coverImage?.webPath"></ion-img>
+              <div class="content">
+                <ion-icon
+                  class="ion-icon-camera"
+                  name="camera-outline"
+                ></ion-icon>
+              </div>
+              <p>Add cover image</p> 
+            </ion-card>
+          </ion-col>
+          <ion-col size="6" ion-activatable ripple-parent>
+            <ion-card class="step2-ion-card"
+              [color]="forRent ? 'primary' : ''"
+              button
+              (click)="pickMultipleImages()"
+            >
+              <div class="content">
+                <ion-icon class="ion-icon-camera" name="add"></ion-icon>
+                <p>Add photo</p>
+              </div>
+              <p>Add up to 6 photos</p>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row class="img-row">
+          <ion-col size="3" *ngFor="let image of images">
+            <ion-card class="imgs-ion-card" ion-activatable ripple-parent button (click)="imgEdit()">
+              <img [src]="image" alt="image">
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <!-- step 2 -->
+    <ion-slide>
+     
+      <ion-row>
+      <ion-col size="12">
+        <h4>Item Detail</h4>
+      </ion-col>
+        <ion-col size="12">
+          <ion-button color="primary" expand="block">
+            <ion-icon name="camera-outline"></ion-icon> Take Picture
+          </ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button color="primary" expand="block">
+            <ion-icon name="image-outline"></ion-icon> Select Picture
+          </ion-button>
+        </ion-col>
+        <ion-col size="12"> Add your cover picture first </ion-col>
+        <ion-col size="12">
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">Title</ion-label>
+            <ion-input type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+
+  <!-- Step 4  -->
+
+  <ion-slide>
+
+    <ion-row>
+   <ion-col size="12">
+    <h4>Price</h4>
+   </ion-col>
+      <ion-col size="12">
+        <ion-item lines ="none">
+        <ion-input class="price-ion-input" hint="decimal" type="number" inputmode="decimal"  clearOnEdit="true" clear-input="true"></ion-input>
+      </ion-item>
+            </ion-col>
+           <ion-col>
+            <ion-item lines="none">
+              <span slot="start">Firm on Price</span>
+              <ion-toggle slot="end"></ion-toggle>
+            </ion-item>
+           </ion-col>
+    </ion-row>
+
+  </ion-slide>
+
+<!-- step 5 last -->
+
+<ion-slide>
+ 
+  <ion-row>
+   <ion-col size="12">
+    <h4>Item address </h4>
+   </ion-col>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="stacked">item address</ion-label>
+        <ion-input type="text" clear-input="true" value="Richardson TX"></ion-input>
+      </ion-item>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-item lines="none">
+              <span slot="start">Do you deliver the item</span>
+              <ion-toggle slot="end"></ion-toggle>
+            </ion-item>
+          </ion-col>
+  </ion-row>
+
+</ion-slide>
+
+</ion-slides>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col class="step-ion-col">
+        <ion-chip [color]="step1 ? 'primary' : 'light'">
+          <ion-label>1.Type </ion-label>
+        </ion-chip>
+      </ion-col>
+
+      <ion-col class="step-ion-col">
+        <ion-chip [color]="step2 ? 'primary' : 'light'">
+          <ion-label>2.Photo</ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col class="step-ion-col">
+        <ion-chip [color]="step3 ? 'primary' : 'light'">
+          <ion-label>3.Detail</ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col class="step-ion-col">
+        <ion-chip [color]="step4 ? 'primary' : 'light'">
+          <ion-label>4.Price</ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col class="step-ion-col">
+        <ion-chip [color]="step5 ? 'primary' : 'light'">
+          <ion-label>5.Finish </ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+    <ion-col size="12">
+      <ion-button color="primary" expand="block" (click)="next()">
+        Next
+      </ion-button>
+    </ion-col>
+  </ion-toolbar>
+</ion-footer>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import { Observable } from 'rxjs/internal/Observable';
+import { ItemService } from '../../Services/account/item-service';
 
 @Component({
   selector: 'app-selling-item',
@@ -7,13 +10,21 @@ import { ActionSheetController } from '@ionic/angular';
   styleUrls: ['./selling-item.page.scss'],
 })
 export class SellingItemPage implements OnInit {
-
+  msgs: Observable<any>;
   constructor(
 
+
+      private itemService : ItemService,
+      private router :Router,
     private actionSheetController : ActionSheetController
   ) { }
 
   ngOnInit() {
+    this.itemService.getItems().subscribe((data) => {
+      console.log(JSON.stringify(data))
+      this.msgs = data;
+  
+    })
   }
 
 

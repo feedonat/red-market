@@ -9,7 +9,7 @@
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;
   --ion-color-primary-shade:linear-gradient(135deg, #7a2e30 0%,#cc0205 100%);
-  --ion-color-primary-tint: #333333;
+  --ion-color-primary-tint: linear-gradient(135deg, #7a2e30 0%,#cc0205 100%);
 
   /** secondary **/
   --ion-color-secondary: #FF0062;
@@ -44,7 +44,7 @@
   --ion-color-warning-tint: #ffef29;
 
   /** danger **/
-  --ion-color-danger: #f4344f;
+  --ion-color-danger: #d0021b;
   --ion-color-danger-rgb: 244,52,79;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255,255,255;

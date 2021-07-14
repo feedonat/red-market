@@ -1,37 +1,97 @@
-.item-profile{
-    // display: flex;
-    // flex-direction: column;
-    // gap: 0px;
-    line-height: 1.7px;
-    h5{
-        font-size: 15px;
-        font-weight: 500;
-    }
-    h4{
-        font-size: 16px;
-        font-weight: 600;
-    }
+.item-profile {
+  // display: flex;
+  // flex-direction: column;
+  // gap: 0px;
+  line-height: 1.7px;
+  h5 {
+    font-size: 15px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 0.2;
+  }
+}
+.item-header {
+  --min-height: 120px;
+  max-height: 250px !important;
 
+  img {
+    padding: 5px;
+    height: 100px;
+    width: 90px;
+    max-width: 100px;
+    max-height: 120px;
+    border-radius: 25px !important;
+    margin-right: 12px;
+  }
+  .input-wraper {
+    display: flex;
+    gap: 5px;
+    .user-image-wrapper {
+      height: 70px;
+      width: 100px;
+      padding: 10px;
+    }
+  }
 }
-ion-item{
-
-    --min-height: 140px;
-    max-height: 250px !important;
-    margin-left: -10px;
-   
-    img{
-        padding :5px;
-        height: 100px;
-        width: 90px;
-        max-width: 100px;
-        max-height: 120px;
-        border-radius: 25px !important;
-        margin-right: 12px;
-    
+.btn-row {
+  margin-left: 15px;
 }
-}
-.messages{
-    h3{
+.messages {
+  h3 {
     margin-left: 15px;
+  }
+}
+
+.items-list {
+  margin-bottom: 80px;
+  .list-item {
+    --padding-start: var(--page-margin);
+    --padding-end: 0px;
+    --inner-padding-start: 0px;
+    --inner-padding-end: var(--page-margin);
+    --inner-padding-top: calc(var(--page-margin) / 2);
+    --inner-padding-bottom: calc(var(--page-margin) / 2);
+
+    .user-row {
+      --ion-grid-column-padding: 0px;
+      width: 100%;
+
+      .user-image-wrapper {
+        padding-inline-end: calc(var(--page-margin) / 2);
+        border-radius: 20px;
+      }
+      .user-image {
+        border-radius: 16px;
+      }
+
+      .user-data-wrapper {
+        padding-inline-start: calc(var(--page-margin) / 2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .user-info {
+          &:not(:last-child) {
+            margin-bottom: calc(var(--page-margin) / 2);
+          }
+
+          .user-name {
+            margin: 0px;
+            margin-bottom: calc(var(--page-margin) / 4);
+            font-size: 16px;
+          }
+
+          .user-age {
+            margin: 0px;
+            color: rgba(var(--ion-color-dark-rgb), 0.4);
+            font-size: 14px;
+          }
+        }
+      }
     }
+  }
 }

@@ -23,6 +23,11 @@ export class OnboardingPage implements OnDestroy,AfterViewInit{
   didInit;
   redirectLoader: HTMLIonLoadingElement;
   authRedirectResult: Subscription;
+  slidesOptions: any = {
+    zoom: {
+      toggle: false // Disable zooming to prevent weird double tap zomming on slide images
+    }
+  };
 
   validation_messages = {
     'email': [

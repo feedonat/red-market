@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ItemService } from '../../Services/account/item-service';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ItemService } from '../../Services/account/item-service';
     ReactiveFormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
+    
   ],
   declarations: [Tab1Page],
   providers: [ItemService],

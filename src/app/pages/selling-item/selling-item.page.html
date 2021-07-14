@@ -1,41 +1,61 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/home/selling"></ion-back-button>
     </ion-buttons>
     <ion-title>Item Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-item class="item-header" lines="none" button detail ion-activatable ripple-parent [routerLink]="['/public-profile']">
 
-<ion-content>
+  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
 
-  <ion-item lines="none" button detail ion-activatable ripple-parent [routerLink]="['/public-profile']">
+  <div class="item-profile">
+    <h5>Item Name</h5>
+    <h4>$20</h4>
+    <p>20 Views</p>
+  </div>
+  
+</ion-item>
+  
+<ion-row class="btn-row">
+  <ion-col size="5">
+    <ion-button  color="primary" expand="block" >Mark as sold</ion-button>
+  </ion-col>
+  <ion-col size="5">
+    <ion-button color="primary" expand="block">Sell fasterr</ion-button>
+  </ion-col>
 
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  <ion-col size="2">
+    <ion-button fill="clear" (click)="presentActionSheet()">
+      <ion-icon slot="icon-only" name="ellipsis-vertical-outline" color="primary"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>
+<div class="messages">
+  <h3 >Messages</h3>
+ </div>
+<ion-content class="firebase-listing-content">
+    <ion-list class="items-list" lines="full" [routerLink]="['item']">
+      <ion-item class="list-item" *ngFor="let msg of msgs " button mode="ios">
+        <ion-row class="user-row">
+          <ion-col size="3" class="user-image-wrapper">
+            <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+              <app-image-shell class="user-image" animation="spinner" [src]="msg.image" [alt]="'item image'"></app-image-shell>
+            </app-aspect-ratio>
+          </ion-col>
+          <ion-col class="user-data-wrapper">
+            <div class="user-info">
+              <h3 class="user-name">
+                <app-text-shell animation="bouncing" [data]="msg?.name"></app-text-shell>
+              </h3>
+              <h5 class="user-age">
+                <app-text-shell animation="bouncing" [data]="msg?.price"></app-text-shell>
+              </h5>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
 
-    <div class="item-profile">
-      <h5>Item Name</h5>
-      <h4>$20</h4>
-      <p>20 Views</p>
-    </div>
-    
-  </ion-item>
-    
-  <ion-row class="details-purchase-options-row">
-    <ion-col size="5">
-      <ion-button  color="primary" expand="block" >Mark as sold</ion-button>
-    </ion-col>
-    <ion-col size="5">
-      <ion-button color="primary" expand="block">Sell fasterr</ion-button>
-    </ion-col>
-
-    <ion-col size="2">
-      <ion-button fill="clear" (click)="presentActionSheet()">
-        <ion-icon slot="icon-only" name="ellipsis-vertical-outline" color="primary"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-  <div class="messages">
- <h3 >Messages</h3>
-</div>
 </ion-content>
