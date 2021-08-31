@@ -1,0 +1,29 @@
+{
+    "name": "@types/core-js",
+    "version": "2.5.4",
+    "description": "TypeScript definitions for core-js",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Ron Buckton",
+            "url": "https://github.com/rbuckton",
+            "githubUsername": "rbuckton"
+        },
+        {
+            "name": "Michel Felipe",
+            "url": "https://github.com/mfdeveloper",
+            "githubUsername": "mfdeveloper"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/core-js"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "f22eaaceef681f8f92f2887ef37923053c5f4ca28410e6ef2a7e4bd9bd2b469d",
+    "typeScriptVersion": "3.1"
+}

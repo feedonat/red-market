@@ -14,6 +14,10 @@
     line-height: 0.2;
   }
 }
+ion-title{
+  font-weight: bolder !important;
+  font-size: 20px !important;
+}
 .item-header {
   --min-height: 120px;
   max-height: 250px !important;
@@ -43,9 +47,12 @@
 .messages {
   h3 {
     margin-left: 15px;
+    color: var(--ion-text-color);
   }
 }
-
+.sale-action{
+  background: var(--ion-color-step-100);
+}
 .items-list {
   margin-bottom: 80px;
   .list-item {

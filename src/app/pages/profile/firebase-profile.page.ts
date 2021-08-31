@@ -4,7 +4,7 @@ import { FirebaseProfileModel } from './firebase-profile.model';
 import { Subscription } from 'rxjs';
 import { IResolvedRouteData, ResolverHelper } from '../../utils/resolver-helper';
 import { switchMap } from 'rxjs/operators';
-import { FirebaseAuthService } from '../../Services//firebase-auth.service';
+import { FirebaseAuthService } from '../..//firebase/auth/firebase-auth.service';
 
 @Component({
   selector: 'app-firebase-profile',
@@ -47,7 +47,7 @@ export class FirebaseProfilePage implements OnInit {
     this.authService.signOut().subscribe(() => {
       // Sign-out successful.
       // Replace state as we are no longer authorized to access profile page.
-      this.router.navigate(['firebase/auth/sign-in'], { replaceUrl: true });
+      this.router.navigate(['redmarket/profile/sign-in'], { replaceUrl: true });
     }, (error) => {
       console.log('signout error', error);
     });

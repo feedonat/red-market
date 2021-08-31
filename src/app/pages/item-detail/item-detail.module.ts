@@ -10,6 +10,8 @@ import { ItemDetailPage } from './item-detail.page';
 import { ComponentsModule } from '../../components/components.module';
 import { ItemService } from '../../Services/account/item-service';
 import { OfferComponent } from '../offer/offer.component';
+import { ItemFireStore } from '../item/Item-service';
+import { ChatService } from '../chat-detail/chat-service';
 
 @NgModule({
   imports: [
@@ -20,7 +22,7 @@ import { OfferComponent } from '../offer/offer.component';
     ComponentsModule
   ],
   declarations: [ItemDetailPage,OfferComponent],
-  providers: [ItemService],
+  providers: [ItemService,ItemFireStore,ChatService],
   exports:[OfferComponent]
 })
 export class ItemDetailPageModule {}

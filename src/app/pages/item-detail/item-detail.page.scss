@@ -4,7 +4,7 @@
 // Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
 :host {
   --page-margin: var(--app-fair-margin);
-  --page-background: var(--app-background);
+ // --page-background: var(--app-background);
 
   --page-swiper-pagination-space: 30px;
   --page-swiper-pagination-height: 18px;
@@ -13,7 +13,7 @@
   --page-options-gutter: calc(var(--page-margin) / 2);
   --page-related-items-gutter: calc(var(--page-margin) / 2);
 
-  --page-color: #cb328f;
+ // --page-color: #cb328f;
 }
 app-image-shell.showcase-image {
   --image-shell-loading-background: rgba(var(--shell-color-rgb), .10);
@@ -26,8 +26,8 @@ app-image-shell.showcase-image {
   .slider-row {
     height: 450px;
     .details-slides {
-      --bullet-background: var(--ion-color-dark-tint);
-      --bullet-background-active: var(--ion-color-dark-tint);
+      --bullet-background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.27);
+      //--bullet-background-active: var(--ion-color-dark-tint);
 
       height: 100%;
       width: 100%;
@@ -88,7 +88,6 @@ app-image-shell.showcase-image {
   .detail-title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--ion-color-dark-tint);
     margin: 0px;
     margin-bottom: calc(var(--page-margin) / 2);
   }
@@ -148,7 +147,12 @@ app-image-shell.showcase-image {
   }
 }
 .footer-tool-bar{
-  height: 60px;
+  height: 85px;
+  --background: var(--ion-toolbar-background);
+  ion-toolbar{
+  height: 90px;
+    --background: var(--ion-toolbar-background);
+  }
 }
 
 ion-item{
@@ -161,18 +165,36 @@ ion-item{
     margin-left: -5px;
   }
   margin-top: 20px;
-    --ion-item-background :var(--ion-color-light );
     border-radius: 16px;
    
 }
 /* Show background if class is active */
 .show-background {
+  height: 90px;
   border-style: none;
   animation: fadein 1s;
   -moz-animation: fadein 1s; /* Firefox */
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
-  background: var(--ion-color-dark);
+  --background: var(--ion-toolbar-background);
+  .action-btn {
+    --border-radius: 50%;
+    --padding-start: 2px;
+    --padding-end: 2px;
+    --background: transparent;
+    margin-left: 6px;
+    margin-right: 7px;
+    width: 45px;
+    height: 45px;
+    margin-left: 6px;
+    margin-right: 7px;
+    .btn-icon {
+      font-size: 35px;
+    }
+  }
+  .action-btn-mid{
+   margin-right: 0px;
+  }
 }
 
 @keyframes fadein {
@@ -201,13 +223,25 @@ ion-item{
     opacity: 1;
   }
 }
-.header-ion-toolbar {
+ion-toolbar {
   --background: transparent no-repeat fixed center;
   position: absolute;
-  top: 0;
-  padding-left: 3px;
-  padding-right: 3px;
-  
+  .action-btn {
+    --border-radius: 50%;
+    --padding-start: 2px;
+    --padding-end: 2px;
+    --background: rgba(var( --ion-background-color-rgb, 0, 0, 0), 0.40);
+    width: 45px;
+    height: 45px;
+    margin-left: 6px;
+    margin-right: 7px;
+    .btn-icon {
+      font-size: 35px;
+    }
+  }
+  .action-btn-mid{
+   margin-right: 0px;
+  }
 }
 
 /* Remove bottom border on md */
@@ -218,19 +252,7 @@ ion-item{
 .header-ios ion-toolbar:last-child {
   --border-width: 0;
 }
-.action-btn {
-  --border-radius: 50%;
-  --padding-start: 2px;
-  --padding-end: 2px;
 
-  width: 40px;
-  height: 40px;
-
-  .btn-icon {
-    font-size: 30px;
-
-  }
-}
 ion-card{
  img{
    padding: 5px;
@@ -239,9 +261,7 @@ ion-card{
 
 }
 
-
 .similar-items{
-
   ion-card {
     display: block;
     margin: 0;

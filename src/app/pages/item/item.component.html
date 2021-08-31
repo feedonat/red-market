@@ -1,30 +1,35 @@
-<ion-header [translucent]="true" class="ion-no-border">
+
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Post an Item</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">
-        <ion-icon class="ion-icon-close" name="close"></ion-icon>
+    <ion-buttons slot="start">
+      <ion-button mode="ios" (click)="dismissModal()" >
+        <ion-icon class="ion-icon-close" name="close" color="primary"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <ion-slides pager="true" [options]="slidesOptions" *ngIf="viewEntered">
+  <form [formGroup]="itemForm">
+  <ion-slides pager="false" [options]="slidesOptions" *ngIf="viewEntered">
     <!-- step 1 -->
     <ion-slide>
-     
+   
+        <ion-toggle [(ngModel)]="item.postType" formControlName="postType" hidden=true></ion-toggle>
       <ion-grid>
         <ion-row>
           <ion-col size="12">
             <h4>What is your post for</h4>
           </ion-col>
-          <ion-col size="12">
+          <ion-col size="6">
             <ion-card class="step1-ion-card"
               (click)="selectSaleType()"
-              [color]="forSale ? 'primary' : ''"
+              [color]="item.postType==1 ? 'primary' : ''"
               button
               ion-activatable
               ripple-parent
+              mode="ios"
             >
               <ion-card-content>
                 <div class="post-type">
@@ -33,9 +38,9 @@
               </ion-card-content>
             </ion-card>
           </ion-col>
-          <ion-col size="12" ion-activatable ripple-parent>
-            <ion-card class="step1-ion-card"
-              [color]="forRent ? 'primary' : ''"
+          <ion-col size="6" ion-activatable ripple-parent>
+            <ion-card mode="ios" class="step1-ion-card"
+              [color]="item.postType==0 ? 'primary' : ''"
               button
               (click)="selectRentType()"
             >
@@ -48,6 +53,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+
     </ion-slide>
     <!-- step 2 -->
     
@@ -59,13 +65,13 @@
           <h4>Add Item Photo</h4>
          </ion-col>
           <ion-col size="6">
-            <ion-card class="step2-ion-card" (click)="selectImageSource()"
+            <ion-card mode="ios" class="step2-ion-card" (click)="pickSinglemage()"
               color="primary"
               button
               ion-activatable
               ripple-parent
             >
-            <ion-img  *ngIf="coverImage" class="cover-img"   [src]="coverImage?.webPath"></ion-img>
+            <img  *ngIf="coverImage" class="cover-img"   [src]="images[0] ? 'url(' + images[0] + ')' : ''">
               <div class="content">
                 <ion-icon
                   class="ion-icon-camera"
@@ -76,7 +82,7 @@
             </ion-card>
           </ion-col>
           <ion-col size="6" ion-activatable ripple-parent>
-            <ion-card class="step2-ion-card"
+            <ion-card mode="ios" class="step2-ion-card"
               [color]="forRent ? 'primary' : ''"
               button
               (click)="pickMultipleImages()"
@@ -90,7 +96,7 @@
           </ion-col>
         </ion-row>
         <ion-row class="img-row">
-          <ion-col size="3" *ngFor="let image of images">
+          <ion-col size="3" *ngFor="let image of base64Images">
             <ion-card class="imgs-ion-card" ion-activatable ripple-parent button (click)="imgEdit()">
               <img [src]="image" alt="image">
             </ion-card>
@@ -107,20 +113,88 @@
         <h4>Item Detail</h4>
       </ion-col>
         <ion-col size="12">
-          <ion-button color="primary" expand="block">
-            <ion-icon name="camera-outline"></ion-icon> Take Picture
-          </ion-button>
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">Itenm Name</ion-label>
+            <ion-input type="text" required formControlName="title" [(ngModel)]="item.title"></ion-input>
+          </ion-item>
         </ion-col>
-        <ion-col size="12">
-          <ion-button color="primary" expand="block">
-            <ion-icon name="image-outline"></ion-icon> Select Picture
-          </ion-button>
-        </ion-col>
-        <ion-col size="12"> Add your cover picture first </ion-col>
+
         <ion-col size="12">
           <ion-item class="input-item">
-            <ion-label color="primary" position="floating">Title</ion-label>
-            <ion-input type="text" required></ion-input>
+            <ion-label color="primary" position="floating">Category</ion-label>
+            <ion-select interface="action-sheet" class="custom-options" formControlName="cat" [(ngModel)]="item.cat">
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">SubCategory</ion-label>
+            <ion-select interface="action-sheet" class="custom-options" formControlName="subCat" [(ngModel)]="item.SubCategory">
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">Condition</ion-label>
+            <ion-select interface="action-sheet" class="custom-options" formControlName="condition" [(ngModel)]="item.condtion">
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">Detail Description</ion-label>
+            <ion-textarea rows="4" cols="20" requred=true formControlName="desc" [(ngModel)]="item.desc"></ion-textarea>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">Brand</ion-label>
+            <ion-input type="text" formControlName="brand" [(ngModel)]="item.brand"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">Size</ion-label>
+            <ion-input type="text"  formControlName="size" [(ngModel)]="item.size"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item class="input-item">
+            <ion-label color="primary" position="floating">Color</ion-label>
+            <ion-select interface="action-sheet" class="custom-options" formControlName="color" [(ngModel)]="item.color">
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="blonde">Blonde</ion-select-option>
+              <ion-select-option value="black">Black</ion-select-option>
+              <ion-select-option value="red">Red</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -136,13 +210,13 @@
    </ion-col>
       <ion-col size="12">
         <ion-item lines ="none">
-        <ion-input class="price-ion-input" hint="decimal" type="number" inputmode="decimal"  clearOnEdit="true" clear-input="true"></ion-input>
+        <ion-input formControlName="price" [(ngModel)]="item.price" class="price-ion-input" hint="decimal" type="number" inputmode="decimal"  clearOnEdit="true" clear-input="true"></ion-input>
       </ion-item>
             </ion-col>
            <ion-col>
             <ion-item lines="none">
               <span slot="start">Firm on Price</span>
-              <ion-toggle slot="end"></ion-toggle>
+              <ion-toggle slot="end" formControlName="firmOnPrice" [(ngModel)]="item.firmOnPrice"></ion-toggle>
             </ion-item>
            </ion-col>
     </ion-row>
@@ -160,26 +234,24 @@
     <ion-col size="12">
       <ion-item>
         <ion-label position="stacked">item address</ion-label>
-        <ion-input type="text" clear-input="true" value="Richardson TX"></ion-input>
+        <ion-input formControlName="address" [(ngModel)]="item.address" type="text" clear-input="true" value="Richardson TX"></ion-input>
       </ion-item>
           </ion-col>
 
           <ion-col size="12">
             <ion-item lines="none">
               <span slot="start">Do you deliver the item</span>
-              <ion-toggle slot="end"></ion-toggle>
+              <ion-toggle slot="end" formControlName="canDeliver"  [(ngModel)]="item.canDeliber" ></ion-toggle>
             </ion-item>
           </ion-col>
   </ion-row>
-
 </ion-slide>
-
 </ion-slides>
-
+</form>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col class="step-ion-col">
         <ion-chip [color]="step1 ? 'primary' : 'light'">
           <ion-label>1.Type </ion-label>
@@ -206,10 +278,15 @@
           <ion-label>5.Finish </ion-label>
         </ion-chip>
       </ion-col>
-    </ion-row>
-    <ion-col size="12">
+    </ion-row> -->
+    <ion-col size="12" *ngIf="!formFinish">
       <ion-button color="primary" expand="block" (click)="next()">
         Next
+      </ion-button>
+    </ion-col>
+    <ion-col size="12" *ngIf="formFinish">
+      <ion-button color="primary" expand="block" (click)="saveItem()">
+        Post
       </ion-button>
     </ion-col>
   </ion-toolbar>

@@ -4,7 +4,7 @@ ion-content {
 
 ion-title {
   font-weight: bolder !important;
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 .empty-list-message {
   margin: calc(var(--page-margin) * 3);
@@ -22,14 +22,35 @@ ion-title {
 }
 ion-col {
   margin-left: 10px;
+}
+.chat-list{
+    padding-bottom: 100px;
+}
+.profile{
+    h4{
+        font-weight: 500;
+        font-size: 14px;
+    }
+    p{
+        padding: 2px;
+        line-height: 1px;
+        font-weight: 400;
+        font-size: 12px;
+      }
 
 }
+.item-img{
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 16px;
+    
+}
+
 .chat_container {
     padding: 15px 15px;
+    padding-bottom: 2px;
     flex-wrap: wrap;
     display: flex;
-    margin-top: 50px;
-    margin-bottom: 100px;
 
     .chat_box {
         width: auto !important;
@@ -41,8 +62,9 @@ ion-col {
 
         .chat {
             min-width: 90px;
-            border-radius: 10px;
+            border-radius: 23px;
             max-width: 100%;
+            overflow: overlay;
 
             h2 {
                 margin: 0;
@@ -93,7 +115,7 @@ ion-col {
         &.received {
 
             .chat {
-                background: var(--ion-color-light);
+                background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.07);
                 padding: 15px 25px 12px 14px;
                 min-width: unset;
 
@@ -117,7 +139,7 @@ ion-col {
 
 
                 h2 {
-                    text-align: right;
+                    //text-align: right;
                     color: var(--white);
                     font-weight: 400;
 
@@ -128,13 +150,15 @@ ion-col {
                 }
 
                 p {
-                    text-align: right;
+                    //text-align: right;
                     color: var(--white);
                     font-weight:500;
                 }
             }
         }
     }
+
+
 }
 
 ion-footer {
@@ -193,10 +217,10 @@ ion-footer {
                    // --padding-bottom: 18px !important;
                     
                     color: var(--text-black) !important;
-                    --placeholder-color: #78927e !important;
+                    --placeholder-color: #333a34 !important;
                     --placeholder-opacity: 1;
                     --placeholder-font-weight: 400 !important;
-                    background: var(--ion-color-light);
+                    background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.07);
                     border-radius: 16px;
                 }
             }
@@ -271,4 +295,6 @@ ion-footer {
             }
         }
     }
+
+
 }

@@ -8,6 +8,10 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ItemService } from '../../Services/account/item-service';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ItemFireStore } from '../item/Item-service';
+import { HomePageService } from './HomePage-Service';
 
 @NgModule({
   imports: [
@@ -16,10 +20,10 @@ import { ImagePicker } from '@ionic-native/image-picker';
     FormsModule,
     ReactiveFormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
-    
+    Tab1PageRoutingModule,
+    AngularFireStorageModule,
   ],
   declarations: [Tab1Page],
-  providers: [ItemService],
+  providers: [ItemService,HomePageService,ItemFireStore],
 })
 export class Tab1PageModule {}

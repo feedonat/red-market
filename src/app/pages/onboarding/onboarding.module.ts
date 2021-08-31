@@ -21,7 +21,7 @@ const redirectLoggedInToProfile = (next) => map(user => {
   // when queryParams['auth-redirect'] don't redirect because we want
   // the component to handle the redirection
   if (user !== null && !next.queryParams['auth-redirect']) {
-    return ['home/'];
+    return ['redmarket/'];
   } else {
     return true;
   }

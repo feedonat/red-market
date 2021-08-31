@@ -2,7 +2,7 @@
   <ion-toolbar>
 
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home" mode="md">
+        <ion-back-button defaultHref="/redmarket/items" mode="md">
         </ion-back-button>
       </ion-buttons>
 
@@ -12,27 +12,39 @@
 
 <ion-content class="firebase-listing-content">
   <ion-list class="items-list" lines="full">
-    <ion-item class="list-item" *ngFor="let item of items " button mode="ios"  [routerLink]="['detail']">
-      <ion-row class="user-row">
-        <ion-col size="3" class="user-image-wrapper">
-          <app-aspect-ratio [ratio]="{w: 1, h: 1}">
-            <app-image-shell class="user-image" animation="spinner" [src]="item.image" [alt]="'item image'"></app-image-shell>
-          </app-aspect-ratio>
+    <ion-item class="list-item" *ngFor="let chat of chats" button mode="ios">
+      <ion-row class="user-row" (click)="chatUser(chat)">
+        <ion-col size="2.5" class="user-image-wrapper">
+
+          <img  *ngIf="chat.sender.uid==currentUser " class="user-img" [src]="chat?.receiver.img" [alt]="'item image'">
+          <img *ngIf="chat.receiver.uid==currentUser"  class="user-img" [src]="chat?.sender.img " [alt]="'item image'">
+          <!-- <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+            <app-image-shell class="user-image" animation="spinner" [src]="chat?.sender.img" [alt]="'item image'"></app-image-shell>
+          </app-aspect-ratio> -->
         </ion-col>
         <ion-col class="user-data-wrapper">
           <div class="user-info">
-            <h3 class="user-name">
-              <app-text-shell animation="bouncing" [data]="item?.name"></app-text-shell>
+            <h3 class="user-name" *ngIf="chat?.sender.uid==currentUser">
+              {{chat?.receiver?.name}}
             </h3>
-            <h5 class="user-age">
-              <app-text-shell animation="bouncing" [data]="item?.price"></app-text-shell>
-            </h5>
+
+            <h3 class="user-name"  *ngIf="chat?.receiver.uid==currentUser">
+              {{ chat?.sender?.name}}
+            </h3>
+
+            <div class="lst-msg">{{chat?.lmsg}}</div>
+            <p color="light">{{chat?.created?.seconds *1000 | amTimeAgo}} </p>
           </div>
+        </ion-col>
+        <ion-col size="2.5">
+          <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+            <app-image-shell class="user-image" animation="spinner" [src]="chat?.item.img" [alt]="'item image'"></app-image-shell>
+          </app-aspect-ratio>
         </ion-col>
       </ion-row>
     </ion-item>
   </ion-list>
-  <h3 *ngIf="!items" class="empty-list-message">
+  <h3 *ngIf="!chats" class="empty-list-message">
     No users found for the selected filters.
   </h3>
 </ion-content>

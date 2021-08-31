@@ -88,7 +88,7 @@ export class OnboardingPage implements OnDestroy,AfterViewInit{
 }
 
   firebaseLoginPage(){
-    this.router.navigateByUrl("/firebase");
+    this.router.navigateByUrl("/login/firebase");
   }
 
   // Once the auth provider finished the authentication flow, and the auth redirect completes,
@@ -101,7 +101,7 @@ export class OnboardingPage implements OnDestroy,AfterViewInit{
       // Get previous URL from our custom History Helper
       // If there's no previous page, then redirect to profile
       // const previousUrl = this.historyHelper.previousUrl || 'firebase/auth/profile';
-      const previousUrl = 'home';
+      const previousUrl = 'redmarket';
 
       // No need to store in the navigation history the sign-in page with redirect params (it's justa a mandatory mid-step)
       // Navigate to profile and replace current url with profile

@@ -2,9 +2,8 @@
 
 :host {
   --page-margin: var(--app-fair-margin);
-  --page-background: var(--app-background);
-
-  --page-background-shade: var(--app-background-shade);
+  //--page-background: var(--app-background);
+  //--page-background-shade: var(--app-background-shade);
   --page-tags-gutter: 5px;
 }
 
@@ -64,6 +63,7 @@
       --padding-end: 0px;
       --inner-padding-start: 0px;
       --inner-padding-end: 0px;
+      --background : none;
     }
   }
 

@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/core';
-import { ActionSheetController, IonSlides, ModalController, Platform } from '@ionic/angular';
+import { ActionSheetController, AlertController, IonSlides, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { ImagePicker,ImagePickerOptions, OutputType} from '@ionic-native/image-picker/ngx';
+import { Item } from './Item-Model';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ItemFireStore } from './Item-service';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -10,20 +13,21 @@ import { ImagePicker,ImagePickerOptions, OutputType} from '@ionic-native/image-p
 export class ItemComponent implements OnInit {
   @ViewChild(IonSlides, { static: false }) slides: IonSlides;
 
-step1 = true;
-step2 = false;
-step3 = false;
-step4=false;
-step5=false;
-forSale = true;
-forRent = false;
 viewEntered = false;
-images: any[] = [];
 coverImage = null;
+images: any[] = [];
+imageUrls : any[] = [];
+showError = false
+formFinish = false;
+errorMsg=""
+item: any ;
+currentUser = null;
+base64Images =[];
+public itemForm: FormGroup;
 
 @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
-
   slidesOptions: any = {
+    slidesPerView:1,
     zoom: {
       toggle: false // Disable zooming to prevent weird double tap zomming on slide images
     }
@@ -32,12 +36,41 @@ coverImage = null;
     private modalController:ModalController,
     private actionSheetController : ActionSheetController,
     private plt: Platform,
-    private imagePicker :ImagePicker
+    private imagePicker :ImagePicker,
+    private loadingCtrl:LoadingController,
+    private itemService :ItemFireStore,
+    private formBuilder : FormBuilder,
+    private toastCtrl: ToastController,
+    private alertCtrl :AlertController
     
     ) { }
 
   ngOnInit() {
-   
+
+    this.itemService.getCurrentUser().subscribe(user=>{
+      console.log('CURRRRRRENT USER ************'+JSON.stringify( user))
+      this.currentUser = user;
+    });
+
+
+    this.itemForm = this.formBuilder.group({
+      postType: [''],
+      title: ['' , Validators.required],
+      cat: [''],
+      subCat: [''],
+      condition: ['' , Validators.required],
+      desc: ['' , Validators.required],
+      price: ['' , Validators.required],
+      firmOnPrice: [''],
+      address: ['' , Validators.required],
+      brand: [''],
+      color: [''],
+      size: [''],
+      madeIn: [''],
+      canDeliver:[''],
+    });
+   this.item = new Item();
+
   }
 
   ionViewDidEnter() {
@@ -50,20 +83,29 @@ coverImage = null;
     }
   }
   
-  async next() {
+  urlEventHander($evnt: any) {
+    this.imageUrls.push = $evnt;
+    console.log("::::::::::Event Emitted ::::::::: " +$evnt)
+  }
 
-    this.step2 = true;
+
+  async next() {
+    
+    this.slides.getActiveIndex().then(index => {
+      console.log(index);
+      if(index==3 ){
+      this.formFinish = true;
+      }
+   });
     this.slides.slideNext();
    }
 
 selectSaleType(){
-  this.forSale = true;
-  this.forRent = false;
+  this.item.postType = 1;
 
 }
 selectRentType(){
-  this.forRent =true;
-  this.forSale = false;
+  this.item.postType = 0;
 }
 
 selectCoverPhoto(){
@@ -106,27 +148,37 @@ async selectImageSource() {
   await actionSheet.present();
 }
 
+async pickSinglemage(){
+  var options: ImagePickerOptions ={
+    outputType:OutputType.DATA_URL,
+  }
+  this.imagePicker.getPictures(options).then((result) => {
+    this.coverImage = 'data:image/jpeg;base64,' + result;
+    this.images[0].push(this.coverImage);
+  }, (err) => {console.log(err) });
+}
 
 async addImage(source: CameraSource) {
-  const image = await Camera.getPhoto({
+    await Camera.getPhoto({
     quality: 60,
     allowEditing: true,
-    resultType: CameraResultType.Uri,
+    resultType: CameraResultType.DataUrl,
     source
-  });
-  console.log(image)
+  }).then((result) => {
+    this.coverImage = 'data:image/jpeg;base64,' + result;
+    this.itemForm.patchValue({ coverImg: result });
+  },(err) => { console.log(err)});
 
-  this.coverImage = image;
-  //const blobData = this.b64toBlob(image.base64String, `image/${image.format}`);
-  //const imageName = 'Give me a name';
-  //this.images.push(blobData);
+}
+showErrorMsg( msg, show){
+  this.showError = true;
+  this.errorMsg = msg;
 
 }
 
 b64toBlob(b64Data, contentType = '', sliceSize = 512) {
   const byteCharacters = atob(b64Data);
   const byteArrays = [];
-
   for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
     const slice = byteCharacters.slice(offset, offset + sliceSize);
 
@@ -145,16 +197,15 @@ b64toBlob(b64Data, contentType = '', sliceSize = 512) {
 
 pickMultipleImages(){
   var options: ImagePickerOptions ={
-
     maximumImagesCount:6,
     outputType:OutputType.DATA_URL,
   }
   this.imagePicker.getPictures(options).then((results) => {
     for (var i = 0; i < results.length; i++) {
       //let filename = results[i].
-        console.log('Image URI: ' + results[i]);
         let base64Image = 'data:image/jpeg;base64,' + results[i];
-        this.images.push(base64Image);
+        this.base64Images.push(base64Image);
+        this.images.push(results[i]);
     }
   }, (err) => { });
 }
@@ -193,6 +244,35 @@ async imgEdit() {
     buttons
   });
   await actionSheet.present();
+}
+
+
+async saveItem() {
+  let loading = await this.loadingCtrl.create({
+    message: "loading...",
+  });
+  await loading.present();
+  this.itemService.addNewItem( this.currentUser, this.itemForm.value , this.images).then(
+    async (res) => {
+      loading.dismiss();
+      let toast = await this.toastCtrl.create({
+        duration: 3000,
+        message: "Successfully Posted new Item!",
+      });
+      toast.present();
+      console.log("finished: ", res);
+    },
+    async (err) => {
+      await loading.dismiss();
+
+      let alert = await this.alertCtrl.create({
+        header: "Error",
+        message: err.message,
+        buttons: ["OK"],
+      });
+      alert.present();
+    }
+  );
 }
 
 }

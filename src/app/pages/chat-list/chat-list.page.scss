@@ -19,24 +19,23 @@
       max-width: inherit;
     }
   }
-
-  .user-age > app-text-shell {
-    --text-shell-line-height: 14px;
-    max-width: 40%;
-  
-    &.text-loaded {
-      max-width: inherit;
-    }
-  }
   ion-fab{
     margin-right: 20px;
     margin-bottom: 20px;
 }
 ion-title{
   font-weight: bolder !important;
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
-  
+  .user-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    align-items: center;
+    align-self: center;
+  }
+
+
   
   // Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
   .filters-toolbar {
@@ -143,6 +142,21 @@ ion-title{
             justify-content: center;
   
             .user-info {
+              .lst-msg{
+                display: -webkit-box;
+                overflow : hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical; 
+                font-size: 12px;
+              }
+              p{
+                padding: 2px;
+                line-height: 1px;
+                color: light;
+                font-weight: 400;
+                font-size: 10px;
+              }
               &:not(:last-child) {
                 margin-bottom: calc(var(--page-margin) / 2);
               }
@@ -150,7 +164,7 @@ ion-title{
               .user-name {
                 margin: 0px;
                 margin-bottom: calc(var(--page-margin) / 4);
-                font-size: 16px;
+                font-size: 14px;
               }
   
               .user-age {

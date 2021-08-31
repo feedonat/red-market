@@ -6,13 +6,13 @@
   --padding-bottom: var(--page-margin);
 
   .sc-ion-searchbar-md-h {
-    --background: rgb(228, 226, 226);
+    --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.07);
     --border-radius: 20px;
     --box-shadow: none;
   }
   .searchbar-row {
     --ion-grid-column-padding: 0px;
-
+     margin: 15px;
     ion-searchbar.items-searchbar {
       padding: 0px;
       // override Ionic fixed height
@@ -26,25 +26,28 @@
       max-width: fit-content;
       flex-shrink: 0;
       flex-grow: 0;
-
       display: flex;
       justify-content: flex-end;
 
       .filters-btn {
         --padding-start: 0px;
-        --padding-end: 0px;
-
+        //--padding-end: 0px;
+        margin-left: 3px;
         margin: 0px;
         font-size: 18px;
-        // override Ionic fixed height
+        text-transform: none;
+        //override Ionic fixed height
         height: initial;
       }
     }
   }
+  
+
 
   .range-item-row {
     --ion-grid-column-padding: 0px;
-
+    margin-left: 15px;
+    margin-right: 15px;
     margin-top: var(--page-margin);
     padding-top: var(--page-margin);
     // box-shadow at the top
@@ -79,11 +82,26 @@
   }
 }
 
-ion-card {
+
+.bottom-left {
+  position: absolute;
+  color: #fff;
+    padding: 5px;
+    height: 25px;
+    align-content: center;
+    bottom: 5px;
+    align-items: center;
+    margin-left: 5px;
+    font-weight: 500;
+   font-size:  12px;
+   background: rgba(black, 0.4);
+}
+.item-ion-card {
   display: block;
   margin: 0;
-  border-radius: 6px;
-
+  border-radius: 8px;
+max-height: 150px;
+min-height: 120px;
   .cover-img {
     background-color: var(--ion-color-white);
     background-size: cover;
@@ -100,6 +118,7 @@ h5 {
   font-weight: 700;
   padding: 10px;
   margin-left: 5px;
+  padding-bottom: 0px;
 }
 
 ion-card-content {
@@ -111,41 +130,35 @@ ion-card-content {
 
   ion-col {
     padding: 2px;
+    //height: 130px;
   }
 }
 .cat-ion-slides {
-  // width: 160px !important;
-  //display: block;
-  //margin-top: -20px;
-  padding: 10px;
+  margin-bottom: -20px;
+  margin-top: -23px;
   ion-slide {
-    height: 80px;
-    width: 120px !important;
-    margin-top: 6px;
     .single-cat {
-      display: flex;
-      flex-direction: column;
-      margin-top: 35px;
-      margin-bottom: 20px;
-      gap: 2px;
+      align-items: center;
       .pic {
         ion-card {
-          border-radius: 20px;
+          border-radius: 50%;
           ion-card-content {
             align-items: center;
             text-align: center;
           }
           ion-icon {
-            font-size: 50px;
-            --ionicon-stroke-width: 18px;
+            font-size: 40px;
+            --ionicon-stroke-width: 16px;
           }
           height: 60px;
-          width: 100px;
+          width: 60px;
         }
       }
       .desc {
-        font-size: 15px;
+        font-size: 12px;
+        margin-top: -10px;
       }
     }
+
   }
 }

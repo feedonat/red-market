@@ -1,7 +1,7 @@
-<ion-header class="ion-no-border">
+<ion-header  class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/redmarket/items" mode="md"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button>
@@ -92,7 +92,7 @@
             </ion-label>
           </ion-item>
 
-          <ion-item [routerLink]="['/']">
+          <ion-item (click)="ThemeSwitcher()" detail>
             <ion-icon slot="start" name="color-fill-outline" detail></ion-icon>
             <ion-label>
               <p>Theme</p>

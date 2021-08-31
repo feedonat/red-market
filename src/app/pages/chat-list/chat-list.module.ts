@@ -9,6 +9,8 @@ import { ChatListPageRoutingModule } from './chat-list-routing.module';
 import { ChatListPage } from './chat-list.page';
 import { ItemService } from '../../Services/account/item-service';
 import { ComponentsModule } from '../../components/components.module';
+import { ChatService } from '../chat-detail/chat-service';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   imports: [
@@ -16,9 +18,15 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     ChatListPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 59
+      }
+    }),
+
   ],
   declarations: [ChatListPage],
-  providers:[ItemService]
+  providers:[ItemService,ChatService]
 })
 export class ChatListPageModule {}

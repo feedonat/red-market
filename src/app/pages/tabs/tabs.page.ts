@@ -18,9 +18,8 @@ export class TabsPage {
     const modal = await this.modalController.create({
       component: ItemComponent,
       animated:true,
-      backdropDismiss:true,
-      showBackdrop:true,
-      mode:'ios'
+      mode:'ios',
+      swipeToClose:true
 
     });
 
@@ -32,7 +31,7 @@ export class TabsPage {
 
 
   profileClick(){
-    this.router.navigateByUrl('/profile');
+    this.router.navigateByUrl('redmarket/profile');
   }
 
 chatsClicked(){

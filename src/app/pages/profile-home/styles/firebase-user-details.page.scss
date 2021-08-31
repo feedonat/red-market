@@ -76,7 +76,7 @@
     border-bottom: none !important;
 }
   .content-section {
-    padding: var(--page-margin);
+    //padding: var(--page-margin);
     .section-header {
       margin-top: 0px;
       margin-bottom: var(--page-margin);
@@ -86,7 +86,7 @@
   .user-languages-wrapper {
     .language-item-row {
       --ion-grid-column-padding: 0px;
-      margin-left: -15px;
+      //margin-left: -15px;
       margin-bottom: calc(var(--page-margin) / 2);
 
       .language-item {
@@ -133,11 +133,13 @@
     }
   }
   ion-list{
-    margin-left: 8px;
-    border-radius: 16px;
+    
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     padding-top: 5px;
-    padding: 5px;
+   // padding: 5px;
   ion-item {
+    margin-left: 12px;
       p{
         font-weight: 700;
         font-size: medium;
@@ -146,8 +148,7 @@
       --detail-icon-font-size : 22px;
   
       height: 60px;
-      margin:0 auto;
-      border-radius: 16px;
+      //border-radius: 16px;
   }
 }
   .last-section {

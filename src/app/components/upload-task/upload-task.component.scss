@@ -1,0 +1,16 @@
+.imgs-ion-card{
+    margin-left: -15px;
+    height: 90px;
+    margin: 0px;
+    align-items: center;
+      img{
+        height: 90px;
+        width: 100%;
+      background-color: var(--ion-color-white);
+      background-size: cover;
+      background-position: 100%;
+      object-fit: cover;
+      position: relative;
+      }
+  
+  }

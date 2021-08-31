@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostBinding, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonRouterOutlet, isPlatform, ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs/internal/Observable';
-import { ItemService } from '../../Services/account/item-service';
+import { ItemFireStore } from '../item/Item-service';
 import { OfferComponent } from '../offer/offer.component';
 
 @Component({
@@ -15,9 +15,11 @@ export class ItemDetailPage implements OnInit {
 
 
   items:Observable<any>;
+  itemId =null;
   details:any
   showToolbar = false;
   showFooter = false;
+  btnBgColor = '--ion-color-step-150';
   heartType: string = "heart-outline";
   transition: boolean = false;
   slidesOptions: any = {
@@ -30,27 +32,29 @@ export class ItemDetailPage implements OnInit {
     return (this.details && this.details.isShell) ? true : false;
   }
   constructor(
-    private itemService :ItemService,
+    private itemService :ItemFireStore,
     private modalController:ModalController,
     private router:Router,
-    private routerOutlet: IonRouterOutlet
-    ) { }
+    private routerOutlet: IonRouterOutlet,
+    private route: ActivatedRoute,
+    ) { 
+      this.itemId= this.route.snapshot.paramMap.get('id');
+    }
 
   ngOnInit() {
-    this.itemService.getOneItem().subscribe(item=>{
+
+    this.itemId = this.route.snapshot.paramMap.get("id");
+    console.log("item ID ngoninit " + this.itemId);
+
+    this.itemService.getOneItem(this.itemId).subscribe(item=>{
       console.log(JSON.stringify(item));
       this.details = item;
+      console.log('ITEM DETAIL +++++ '+JSON.stringify(this.details));
     });
-
-    this.itemService.getItems().subscribe((data) => {
-      this.items = data;
-  
-    })
    
   }
   currentModal = null;
  
-
     async createModal() {
     const modal = await this.modalController.create({
       component: OfferComponent,
@@ -73,18 +77,22 @@ export class ItemDetailPage implements OnInit {
       const scrollTop = $event.detail.scrollTop;
       this.transition = true;
       this.showToolbar = scrollTop >= 250;
-      this.showFooter = scrollTop >= 540;
+      this.showFooter = scrollTop >= 590;
     }else{
       this.transition = false;
     }
   }
 
   backClicked(){
-    this.router.navigateByUrl("/home/tab1")
+    this.router.navigateByUrl("redmarket/items");
   }
 
   getPublicProfile(){
     this.router.navigateByUrl("/public-profile");
+  }
+
+  chat(){
+    this.router.navigate(["/redmarket/chat/detail",{ id:this.itemId,saler: JSON.stringify(this.details?.poster), itemImg:this.details.images[0],price:this.details.price}])
   }
 
 }

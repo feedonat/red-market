@@ -1,65 +1,64 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/chats" mode="md">
+      <ion-back-button defaultHref="/redmarket/chat" mode="md">
       </ion-back-button>
     </ion-buttons>
     <ion-title >Messages</ion-title>
   </ion-toolbar>
 <ion-toolbar>
   <ion-row>
-    <ion-col class="ion-img-col">
+    <ion-col size="2.5" class="ion-img-col">
       <ion-avatar>
         <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+          [src]="item?.poster.img"
         />
       </ion-avatar>
     </ion-col>
-    <ion-col size="6">
+    <ion-col>
       <div class="profile">
-        <div>
-          <h4>Kedirosa Moha</h4>
-        </div>
-        <div>Joind Mar 2020</div>
-        <div>Richardson TX</div>
+          <h4>{{item?.poster.name}}</h4>
+          <p>Joind Mar 2020</p>
+		  <p>Richardson TX</p>
         <div class="rating">* * * * *</div>
       </div>
     </ion-col>
-    <ion-col class="ion-img-col">
-      <ion-avatar>
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+    <ion-col size="2.5">
+
+        <img class="item-img"
+          [src]="item?.img"
         />
-      </ion-avatar>
+	  $ {{item?.price}}
     </ion-col>
   </ion-row>
 </ion-toolbar>
 </ion-header>
 
-
 <ion-content fullscreen>
-	<div class="chat_container d-flex">
-		<div class="chat_box d-flex received">
+
+	<div class="chat-list">
+	<div class="chat_container d-flex"*ngFor="let msg of msgList" >
+		<!-- <div class="chat_box d-flex received">
 			<div class="chat">
                 <h2><span>Hey Samanth !</span></h2>
 				<p>11:48 am</p>
 			</div>
-		</div>
-		<div class="chat_box d-flex send">
+		</div> -->
+		<div class="chat_box d-flex send" *ngIf="msg?.sender.uid==currentUser.uid">
 			<div class="chat">
-                <h2><span>Hey whats up emili !!</span></h2>
-				<p>11:49 am <ion-icon name="checkmark-done-outline"></ion-icon>
+                <h2><span>{{msg?.txt}}</span></h2>
+				<p>{{msg?.created?.seconds *1000 | amTimeAgo}} <ion-icon name="checkmark-done-outline"></ion-icon>
 				</p>
 			</div>
 		</div>
-		<div class="chat_box d-flex received">
+		<div class="chat_box d-flex received" *ngIf="msg?.sender.uid!=currentUser.uid">
 			<div class="chat">
-                <h2><span>Can you send me rozzy contact?</span></h2>
-				<p>11:50 am</p>
+                <h2><span>{{msg?.txt}}</span></h2>
+				<p>{{msg?.created?.seconds *1000 | amTimeAgo}}</p>
 			</div>
 		</div>
 
-		<div class="chat_box d-flex send">
+		<!-- <div class="chat_box d-flex send">
 			<div class="chat">
 				<h2>Sure ,just a second </h2>
 				<p>11:49 am <ion-icon name="checkmark-done-outline"></ion-icon>
@@ -75,25 +74,27 @@
 				<p>11:49 am <ion-icon name="checkmark-done-outline"></ion-icon>
 				</p>
 			</div>
-		</div>
+		</div> -->
 	</div>
+</div>
 </ion-content>
 
  
 <ion-footer *ngFor="let item of optionItems" [ngClass]="{'active': item.active}">
     <ion-toolbar>
+		<form [formGroup]="msgForm">
 	<div class="form">
 		<ion-list lines="none" class="d-flex">
       <ion-icon name="add-circle-outline" (click)="toggleClass(item)"></ion-icon>
 			<ion-item lines="none">
-				<ion-textarea type="text" placeholder="Type your message"></ion-textarea>
+				<ion-textarea formControlName="txtMsg" type="text" placeholder="Type your message"></ion-textarea>
 			</ion-item>
 			<h3 class="end">
-        <ion-button fill="clear"> <ion-icon slot="icon-only" name="send-outline"></ion-icon></ion-button>
+        <ion-button (click)="addMsg()"fill="clear"> <ion-icon slot="icon-only" name="send-outline"></ion-icon></ion-button>
 			</h3>
 		</ion-list>
 	</div>
-
+</form>
 	<div class="option">
 		<ion-row>
 			<ion-col size="3">

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">RedMarket</string>
+    <string name="title_activity_main">RedMarket</string>
+    <string name="package_name">com.highcode.redmarket</string>
+    <string name="custom_url_scheme">com.highcode.redmarket</string>
+    <string name="fb_app_id">2912813118988639</string>
+    <string name="fb_app_name">red-market</string>
+</resources>

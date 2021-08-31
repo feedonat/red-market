@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="facebook_app_id">2912813118988639</string>
+  <string name="fb_login_protocol_scheme">fb2912813118988639://authorize</string>
+</resources>

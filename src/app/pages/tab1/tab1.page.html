@@ -1,4 +1,69 @@
 <ion-header [translucent]="true" class="ion-no-border">
+
+  <ion-toolbar class="filters-toolbar">
+    <!-- <ion-row class="searchbar-row" align-items-center *ngIf="!searchClicked">
+      <ion-col>
+        <ion-searchbar class="items-searchbar" animated [(ngModel)]="searchQuery" (click)="searchClick()" placeholder="Filter by name..."></ion-searchbar>
+      </ion-col>
+      <ion-col class="call-to-action-col">
+        <ion-button fill="clear" color="secondary" class="filters-btn" (click)="showAgeFilter = !showAgeFilter">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>  -->
+
+    <ion-row class="searchbar-row" align-items-center>
+      <ion-col [size]=" searchClicked ? 9 : 10">
+        <ion-searchbar autofocus="true" class="items-searchbar"  (click)="searchClick()" animated [(ngModel)]="searchQuery" (ionChange)="searchList()" placeholder="Filter by name..."></ion-searchbar>
+      </ion-col>
+      <ion-col size="2" class="call-to-action-col" *ngIf="!searchClicked">
+        <ion-button mode="ios"   fill="clear" class="filters-btn" (click)="showAgeFilter = !showAgeFilter">
+          <ion-icon slot="icon-only" name="grid-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="3" class="call-to-action-col" *ngIf="searchClicked" >
+        <ion-button *ngIf="searchClicked" fill="clear" color="primary" class="filters-btn" (click)="close()">
+          Close
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+    <form [formGroup]="rangeForm" [hidden]="!showAgeFilter">
+      <ion-row class="range-item-row">
+        <ion-col size="12">
+          <div class="range-header">
+            <span class="range-value">{{ rangeForm.controls.dual.value.lower }}</span>
+            <span class="range-label">Filter by age</span>
+            <span class="range-value">{{ rangeForm.controls.dual.value.upper }}</span>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-range class="range-control" formControlName="dual" color="secondary" pin="true" dualKnobs="true" (ionChange)="searchList()" min="1" max="100" step="1" debounce="400"></ion-range>
+        </ion-col>
+      </ion-row>
+    </form>
+    </ion-toolbar>
+<ion-toolbar *ngIf="!searchClicked">
+    <ion-segment mode="md">
+      <ion-segment-button value="All">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Sale">
+        <ion-label>Sale</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Rent">
+        <ion-label>Rent</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="filter">
+        <ion-icon name="options"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<!-- <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar class="filters-toolbar">
     <ion-row class="searchbar-row" align-items-center>
       <ion-col>
@@ -25,29 +90,25 @@
       </ion-row>
     </form>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content [fullscreen]="true">
-
+<ion-content [fullscreen]="true" *ngIf="!searchClicked">
   <ion-row>
     <ion-col size="12" >
       <h5>Top category</h5>
     </ion-col>
     </ion-row>
-           <ion-col size="12"  >
-            <ion-slides pager="false" [options]="slidesOptions" class="cat-ion-slides" *ngIf="viewEntered">
+    <ion-row *ngIf="categories">
+           <ion-col size="12">
+            <ion-slides mode="ios" pager="false" [options]="slidesOptions" class="cat-ion-slides" *ngIf="viewEntered">
               <ion-slide   *ngFor="let cat of categories">
                 <div class="single-cat">
                   <div class="pic">
             <ion-card class="step1-ion-card" [color]="category_bg"
-           
               (click)="categoryClicked()"
               [color]="forSale ? 'primary' : ''"
-              button
-              ion-activatable
-              ripple-parent
-            >
-            
+              button>
+
               <ion-card-content>
                 <ion-icon name="bed-outline"></ion-icon>
               </ion-card-content>
@@ -57,39 +118,63 @@
             <span class="post-type">
               <p>{{cat}}</p>
             </span>
-          </div>
+          </div> 
           </div>
             </ion-slide>
             </ion-slides>
            </ion-col>
-      
+          </ion-row>
     <ion-grid>
       <ion-row class="item-ion-row ">
         <ion-col
-        
         size-xs="4"
         size-sm="3"
         size-lg="2"
-        *ngFor="let item of items">
-          <ion-card ion-activatable ripple-parent
-          mode="ios"
-          routerLink="/item-detail"
-          class="shadow ion-no-margin ion-margin-bottom">
-          <img class="cover-img" src="{{item?.image}}" />
-          <!-- <ion-card-content>
-            <div class="ion-text-nowrap">
-              <ion-text color="primary">
-                <h3 class="bold ellipsis">{{ item?.name }}</h3>
-              </ion-text>
-            </div>
-          </ion-card-content> -->
-          <ion-ripple-effect></ion-ripple-effect>
-        </ion-card>
+        *ngFor="let item of items |async"  routerLink="detail/{{item?.id}}">
+          <ion-card ion-activatable ripple-parent tap tappable
+          class="shadow ion-no-margin ion-margin-bottom item-ion-card ">
+          <img class="cover-img" src="{{item?.images[0]}}"/>
+         
+              <div class="bottom-left">
+             {{item?.price}}
+             </div>
+         
+             <ion-ripple-effect></ion-ripple-effect>
+           
+         </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
+</ion-content>
+<ion-content  *ngIf="searchClicked">
+  <ion-list class="inputs-list" lines="full">
+    <ion-item class="input-item">
+      <ion-label slot="start" color="primary">mobile</ion-label>
+      <ion-button slot="end" fill="clear">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
 
+      </ion-item>
 
+      <ion-item class="input-item">
+        <ion-label color="primary" >running machin</ion-label>
+        <ion-button mode="ios" slot="end" fill="clear">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+        </ion-item>
 
+        <ion-item class="input-item">
+          <ion-label color="primary" >washer</ion-label>
+          <ion-button slot="end" fill="clear">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+          </ion-item>
 
+          <ion-item class="input-item">
+            <ion-label color="primary">tv</ion-label>
+            <ion-button slot="end" fill="clear">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+            </ion-item>
+      </ion-list>
 </ion-content>

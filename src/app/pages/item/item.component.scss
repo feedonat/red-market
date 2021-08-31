@@ -1,31 +1,5 @@
-.five {
-    transform:scale(1);
-    .modal-background {
-      background:rgba(0,0,0,.0);
-      animation: fadeIn .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-      .modal {
-        transform:translateX(-1500px);
-        animation: roadRunnerIn .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-      }
-    }
-    &.out {
-      animation: quickScaleDown 0s .5s linear forwards;
-      .modal-background {
-        animation: fadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-        .modal {
-          animation: roadRunnerOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-        }
-      }
-    }
-  }
-  ion-modal{
-      height: 60%;
-  }
 
-  ion-modal.stack-modal {
-    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-    --backdrop-opacity: var(--ion-backdrop-opacity, 0.32);
-  }
+
 
   .input-item {
     --padding-start: 4px;
@@ -34,8 +8,8 @@
     --inner-padding-end: 0px;
   }
   .ion-icon-close{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     padding: 5px;
   }
 
@@ -90,7 +64,7 @@ h4{
 }
 .img-row{
   ion-col{
-  padding: 3px;
+  padding: 1px;
   }
   margin: 0 auto;
 }
@@ -98,16 +72,16 @@ h4{
 .step1-ion-card{
   height: 160px;
   align-items: center;
+  margin: 6px;
   ion-card-content{
     align-items: center;
     margin: 0 auto;
     h2{
       margin-top: 50px;
-      font-size: 30px;
-      font-weight: 900;
+      font-size: 25px;
+      font-weight: 800;
     }
   }
-  ion-img {
     img{
     background-color: var(--ion-color-white);
     background-size: cover;
@@ -117,11 +91,11 @@ h4{
     object-fit: cover;
     position: relative;
     }
-  }
 
 }
 .step2-ion-card{
   height: 130px;
+margin: 5px;
   align-items: center;
   .content{
     align-items: center;
@@ -139,8 +113,12 @@ h4{
   }
 
 }
-
 .step-ion-col{
   padding: 1px;
   margin-right: -20px;
+}
+ion-slides{
+  padding: 10px;
+  padding-bottom: 50px;
+
 }

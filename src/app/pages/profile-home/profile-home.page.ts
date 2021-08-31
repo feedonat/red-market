@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ThemeService } from '../../Services/theme/theme.service';
 import { FirebaseAuthService } from '../../firebase/auth/firebase-auth.service';
 import { UserService } from '../../Services/account/user.service';
 import { UserProfileModel } from '../../user/profile/user-profile.model';
@@ -38,7 +39,8 @@ export class ProfileHomePage implements OnInit {
     private authService:FirebaseAuthService,
     private router:Router,
     private routerOutlet :IonRouterOutlet,
-    private modalController :ModalController
+    private modalController :ModalController,
+    private themeSwitcher :ThemeService
   ) { }
 
 
@@ -63,12 +65,15 @@ export class ProfileHomePage implements OnInit {
     this.authService.signOut().subscribe(() => {
       // Sign-out successful.
       // Replace state as we are no longer authorized to access profile page.
-      this.router.navigate(['firebase/auth/sign-in'], { replaceUrl: true });
+      this.router.navigate(['redmarket/profile/auth/sign-in'], { replaceUrl: true });
     }, (error) => {
       console.log('signout error', error);
     });
   }
-
+  ThemeSwitcher() {
+    this.themeSwitcher.changeTheme();
+    }
+  
 
 
   async createModal() {
